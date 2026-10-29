@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ForgeAI</title>
+    <meta
+      name="description"
+      content="ForgeAI is a prototype AI website builder dashboard for generating, editing, saving, and previewing web apps."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <div class="brand-wrap">
+          <div class="brand-mark">F</div>
+          <div>
+            <div class="brand-name">ForgeAI</div>
+            <div class="brand-subtitle">AI Website Builder</div>
+          </div>
+        </div>
+
+        <nav class="topnav" aria-label="Main navigation">
+          <button class="nav-link active" type="button">Dashboard</button>
+          <button class="nav-link" type="button">Projects</button>
+          <button class="nav-link" type="button">Settings</button>
+        </nav>
+
+        <div class="header-actions">
+          <div class="model-pill" id="modelStatusPill">
+            <span class="dot"></span>
+            AI model offline
+          </div>
+          <button class="primary-btn" id="newProjectBtn" type="button">+ New project</button>
+        </div>
+      </header>
+
+      <div class="content-shell">
+        <aside class="sidebar">
+          <div class="panel-header">
+            <h2>My Projects</h2>
+            <button class="small-btn" id="sidebarNewProjectBtn" type="button">New</button>
+          </div>
+
+          <div id="projectList" class="project-list" aria-live="polite"></div>
+        </aside>
+
+        <main class="main-panel">
+          <section class="builder-panel">
+            <div class="section-heading-row">
+              <div>
+                <p class="eyebrow">Project prompt</p>
+                <h1 id="activeProjectName">Untitled project</h1>
+              </div>
+              <div class="project-badges">
+                <span class="badge">Draft</span>
+                <span class="badge neutral" id="saveStatusBadge">Unsaved</span>
+              </div>
+            </div>
+
+            <label class="field-label" for="promptInput">Describe the website or app you want to build</label>
+            <textarea
+              id="promptInput"
+              rows="6"
+              placeholder="Example: Create a modern SaaS landing page for a fintech app with a pricing section, testimonials, and a signup form."
+            ></textarea>
+
+            <div class="actions-row">
+              <button class="primary-btn" id="generateBtn" type="button">Generate</button>
+              <button class="secondary-btn" id="starterBtn" type="button">Use starter template</button>
+              <button class="secondary-btn" id="saveBtn" type="button">Save</button>
+              <button class="secondary-btn warn" id="publishBtn" type="button">Publish</button>
+            </div>
+
+            <div class="status-box" id="generationStatus" aria-live="polite">
+              No AI model is connected. Add a secure backend before generating live AI sites.
+            </div>
+          </section>
+
+          <section class="workspace-panel">
+            <div class="tab-bar" role="tablist" aria-label="Workspace tabs">
+              <button class="tab active" type="button" data-tab="preview" role="tab" aria-selected="true">
+                Preview
+              </button>
+              <button class="tab" type="button" data-tab="code" role="tab" aria-selected="false">
+                Code
+              </button>
+              <button class="tab" type="button" data-tab="settings" role="tab" aria-selected="false">
+                Settings
+              </button>
+            </div>
+
+            <div class="tab-panel active" id="previewPanel" role="tabpanel">
+              <iframe id="previewFrame" title="Generated project preview" sandbox="allow-scripts allow-forms allow-same-origin"></iframe>
+            </div>
+
+            <div class="tab-panel" id="codePanel" role="tabpanel">
+              <div class="code-toolbar">
+                <button class="small-btn" id="regenerateSectionBtn" type="button">Regenerate section</button>
+                <button class="small-btn" id="copyCodeBtn" type="button">Copy code</button>
+              </div>
+              <textarea id="codeEditor" aria-label="Project source code"></textarea>
+            </div>
+
+            <div class="tab-panel" id="settingsPanel" role="tabpanel">
+              <div class="settings-grid">
+                <div class="settings-card">
+                  <h3>AI connection status</h3>
+                  <p>Live AI generation is disabled until a secure backend is configured.</p>
+                  <div class="meta-row">
+                    <span>Model</span>
+                    <strong>Not connected</strong>
+                  </div>
+                  <div class="meta-row">
+                    <span>Credentials</span>
+                    <strong>Stored server-side only</strong>
+                  </div>
+                </div>
+
+                <div class="settings-card">
+                  <h3>Publishing</h3>
+                  <p>
+                    Deployment requires a hosting account, backend services, or GitHub Pages configuration.
+                  </p>
+                  <div class="meta-row">
+                    <span>State</span>
+                    <strong>Not deployed</strong>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </main>
+      </div>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
